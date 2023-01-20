@@ -14,7 +14,28 @@ struct auton{
     struct g_s gds;
 };
 
+void menu()
+{
+    auton an[20];
+    int n;
 
+    do
+    {
+        cout << endl<<"MENU'" << endl;
+        cout << "1) Inserimento della categoria e dei giorni in cui si vuole utilizzare l'autovettura" << endl
+             << "2) Stampa del file aggiornato " << endl
+             << "3) Esci.. " << endl<<endl
+             << ">> ";
+            cin>>n;
+
+
+
+
+    }while();
+
+
+
+}
 int main()
 {
 
