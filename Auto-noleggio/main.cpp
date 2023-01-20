@@ -14,10 +14,25 @@ struct auton{
     struct g_s gds;
 };
 
+void ricerca()
+{
+
+
+
+}
+
+void stampa()
+{
+
+
+
+}
+
+
 void menu()
 {
     auton an[20];
-    int n;
+    int sc;
 
     do
     {
@@ -26,12 +41,28 @@ void menu()
              << "2) Stampa del file aggiornato " << endl
              << "3) Esci.. " << endl<<endl
              << ">> ";
-            cin>>n;
+            cin>>sc;
+
+            switch(sc)
+            {
+                case 1:
+
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+                    return 0;
+                    break;
+
+            }
 
 
 
 
-    }while();
+    }while(true);
 
 
 
@@ -39,7 +70,7 @@ void menu()
 int main()
 {
 
-
+    menu();
 
 
     return 0;
