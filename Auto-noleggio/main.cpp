@@ -1,28 +1,63 @@
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
-struct g_s
-{
-    char l,ma,me,g,v,s,d;
-};
+
 
 struct auton{
 
     string categoria,marca,modello,colore;
-    struct g_s gds;
+    string l,ma,me,g,v,s,d;
 };
 
-void ricerca()
+
+void vis_lista(auton an[])
 {
+    ifstream fin("Auto.csv");
+    string app;
+    int cont = 0;
+    while(getline(fin,app,','))
+    {
+      getline(fin,an[cont].categoria,',');
+      getline(fin,an[cont].marca,' ');
+      getline(fin,an[cont].modello,',');
+      getline(fin,an[cont].colore,',');
+      getline(fin,an[cont].l,',');
+      getline(fin,an[cont].ma,',');
+      getline(fin,an[cont].me,',');
+      getline(fin,an[cont].g,',');
+      getline(fin,an[cont].v,',');
+      getline(fin,an[cont].s,',');
+      getline(fin,an[cont].d);
+
+      cout<<" "<<an[cont].categoria;
+      cout<<" "<<an[cont].marca;
+      cout<<" "<<an[cont].modello;
+      cout<<"  "<<an[cont].colore;
+      cout<<" "<<an[cont].l;
+      cout<<" "<<an[cont].ma;
+      cout<<" "<<an[cont].me;
+      cout<<" "<<an[cont].g;
+      cout<<" "<<an[cont].v;
+      cout<<" "<<an[cont].s;
+      cout<<" "<<an[cont].d;
+      cout<<endl;
 
 
+      cont++;
+    }
 
+    fin.close();
 }
+
+
+
 
 void stampa()
 {
+
 
 
 
@@ -32,6 +67,7 @@ void stampa()
 void menu()
 {
     auton an[20];
+
     int sc;
 
     do
@@ -46,6 +82,7 @@ void menu()
             switch(sc)
             {
                 case 1:
+                    vis_lista(an);
 
                     break;
 
@@ -53,16 +90,13 @@ void menu()
 
                     break;
 
-                case 3:
-                    return 0;
-                    break;
 
             }
 
 
 
 
-    }while(true);
+    }while(sc!=3);
 
 
 
