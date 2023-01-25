@@ -14,11 +14,11 @@ struct auton{
 
 
 
-void vis_lista(auton an[])
+void vis_lista(auton an[],int &cont)
 {
     ifstream fin("Auto.csv");
     string app;
-    int cont = 0;
+
     while(getline(fin,app,','))
     {
       getline(fin,an[cont].categoria,',');
@@ -52,17 +52,29 @@ void vis_lista(auton an[])
 
     fin.close();
 }
-void ricerca(auton an[])
+void ricerca(auton an[],int &cont)
 {
     ifstream fin("Auto.csv");
     string c;
     int v = 1,b = 0,g[10],i = 1,k;
-    bool contr;
+    bool contr,cc = false;
 
     //cout<<"Inserire la categoria di auto ed i giorni in cui la si vuole noleggiare(1,2,3,4,5,6,7)(suddivisi da uno spazio) : ";
     cout<<"Inserire la categoria di auto che si vuole noleggiare: ";
-    cin>>c;
-    cout<<"Inserire i rispettivi giorni (1,2,3,4,5,6,7)(inserire 8 per uscire): ";
+
+    do{
+            cin>>c;
+        for(int i=0;i<cont;i++)
+        {
+            if(c == an[i].categoria)
+                cc = true;
+
+        }
+        if(cc == false)
+            cout<<"La categoria inserita non esiste, riprovare: ";
+    }while(cc == false);
+
+    cout<<"Inserire i rispettivi giorni (1,2,3,4,5,6,7)(inserire 8 per uscire): "<<endl;
 
 
  /*    do
@@ -94,17 +106,16 @@ void ricerca(auton an[])
        if(g[i]<8 && g[i]>-1)
        i++;
        else if(g[i]==8)
-        cout<<"Ricerca in corso..."<<endl;
+        cout<<"Ricerca in corso..."<<endl<<endl;
        else
         cout<<"Numero sbagliato"<<endl;
     }while(g[i]!=8 && i!=8);
 
 
     cout<<"Auto disponibili: ";
-    while(an[v].categoria != "0")
+    while(v<=cont)
     {   k = 1; contr = false;
 
-        //cout<<an[v].categoria;
         if(an[v].categoria == c)
         {
 
@@ -112,95 +123,118 @@ void ricerca(auton an[])
             {
                 switch(g[k])
                 {
-                case 1:
-                    if(an[v].l == " L")
-                    contr = true;
+                     case 1:
+                        if(an[v].l == " L")
+                        contr = true;
 
-                    else{
-                    contr = false;
-                    k = 7;
-                    }
-                break;
+                        else
+                        contr = false;
+                     break;
 
-                case 2:
-                    if(an[v].ma == " L")
-                    contr = true;
+                     case 2:
+                        if(an[v].ma == " L")
+                        contr = true;
 
-                    else{
-                    contr = false;
-                    k = 7;
-                    }
-                break;
+                        else
+                        contr = false;
+                     break;
 
-                 case 3:
-                    if(an[v].me == " L")
-                    contr = true;
+                     case 3:
+                        if(an[v].me == " L")
+                        contr = true;
 
-                    else{
-                    contr = false;
-                    k = 7;
-                    }
-                break;
+                        else
+                        contr = false;
+                     break;
 
-                case 4:
-                    if(an[v].g == " L")
-                    contr = true;
+                     case 4:
+                        if(an[v].g == " L")
+                        contr = true;
 
-                    else{
-                    contr = false;
-                    k = 7;
-                    }
-                break;
-                case 5:
-                    if(an[v].v == " L")
-                    contr = true;
+                        else
+                        contr = false;
+                     break;
+                     case 5:
+                        if(an[v].v == " L")
+                        contr = true;
 
-                    else{
-                    contr = false;
-                    k = 7;
-                    }
-                break;
+                        else
+                        contr = false;
+                     break;
 
-                case 6:
-                    if(an[v].s == " L")
-                    contr = true;
+                     case 6:
+                        if(an[v].s == " L")
+                        contr = true;
 
-                    else{
-                    contr = false;
-                    k = 7;
-                    }
-                break;
-                case 7:
-                    if(an[v].d == " L")
-                    contr = true;
+                        else
+                        contr = false;
+                     break;
+                     case 7:
+                        if(an[v].d == " L")
+                        contr = true;
 
-                    else{
-                    contr = false;
-                    k = 7;
-                    }
-                break;
+                        else
+                        contr = false;
+                     break;
 
                 }
+            if(contr == false){
+                k = 10;
+                g[k] = 8;
+                }
+                else
              k++;
             }
-                if(contr == true){
-                    b++;
-                    cout<<endl<<b<<")"<<an[v].categoria<<"  "<<an[v].marca<<an[v].modello<<"  "<<an[v].colore;
-                }
+
+            if(contr == true){
+                b++;
+                cout<<endl<<b<<")"<<an[v].categoria<<"  "<<an[v].marca<<"  "<<an[v].modello<<"  "<<an[v].colore;
+            }
         }
      v++;
     }
 
+
+    if(b != 0)
+    {
+
+        int sc1;
+
+        cout<<endl<<endl<<"Inserire il numero corrispondente all'auto che si vuole affittare: ";
+        do{
+        cin>>sc1;
+        if(sc1>b || sc1<0)
+            cout<<"Inserimento errato, riprovare: ";
+        }while(sc1>b || sc1<0);
+
+    }
+    else
+        cout<<endl<<"Non sono state trovate macchine disponibili con le seguenti caratteristiche";
+
+
+
+
     fin.close();
 }
 
+void stampa()
+{
+
+
+
+
+
+
+
+}
 
 
 void menu()
 {
+
     auton an[20];
 
-    int sc;
+    int sc,cont = 0;;
 
     do
     {
@@ -214,12 +248,12 @@ void menu()
             switch(sc)
             {
                 case 1:
-                    vis_lista(an);
+                    vis_lista(an,cont);
 
                     break;
 
                 case 2:
-                ricerca(an);
+                ricerca(an,cont);
                     break;
 
                 case 3:
