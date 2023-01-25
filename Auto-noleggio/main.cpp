@@ -5,7 +5,6 @@
 using namespace std;
 
 
-
 struct auton{
 
     string categoria,marca,modello,colore;
@@ -56,14 +55,38 @@ void vis_lista(auton an[])
 void ricerca(auton an[])
 {
     ifstream fin("Auto.csv");
-
     string c;
     int v = 1,b = 0,g[10],i = 1,k;
     bool contr;
 
-    cout<<"Inserire il categoria di auto che si vuole noleggiare: ";
+    //cout<<"Inserire la categoria di auto ed i giorni in cui la si vuole noleggiare(1,2,3,4,5,6,7)(suddivisi da uno spazio) : ";
+    cout<<"Inserire la categoria di auto che si vuole noleggiare: ";
     cin>>c;
-    cout<<"Inserire i giorni in cui la si vuole noleggiare(1,2,3,4,5,6,7)(8 per uscire): "<<endl;
+    cout<<"Inserire i rispettivi giorni (1,2,3,4,5,6,7)(inserire 8 per uscire): ";
+
+
+ /*    do
+    {
+        c[t] = cg[t];
+        cout<<c[t]<<endl;
+        cout<<"ciao";
+        t++;
+
+    }
+     while(cg[t] != ' ');
+
+    do
+    {
+        if(cg[t] != ' ')
+        g[i] = cg[t];
+        cout<<"lol";
+        t++; i++;
+    }
+    while(cg[t] != ' '  &&  cg[t+1] != ' ');
+
+    i = 0;
+*/
+
 
     do
     {
@@ -90,7 +113,7 @@ void ricerca(auton an[])
                 switch(g[k])
                 {
                 case 1:
-                    if(an[v].l == "L")
+                    if(an[v].l == " L")
                     contr = true;
 
                     else{
@@ -100,7 +123,7 @@ void ricerca(auton an[])
                 break;
 
                 case 2:
-                    if(an[v].ma == "L")
+                    if(an[v].ma == " L")
                     contr = true;
 
                     else{
@@ -110,7 +133,7 @@ void ricerca(auton an[])
                 break;
 
                  case 3:
-                    if(an[v].me == "L")
+                    if(an[v].me == " L")
                     contr = true;
 
                     else{
@@ -120,7 +143,7 @@ void ricerca(auton an[])
                 break;
 
                 case 4:
-                    if(an[v].g == "L")
+                    if(an[v].g == " L")
                     contr = true;
 
                     else{
@@ -129,7 +152,7 @@ void ricerca(auton an[])
                     }
                 break;
                 case 5:
-                    if(an[v].v == "L")
+                    if(an[v].v == " L")
                     contr = true;
 
                     else{
@@ -139,7 +162,7 @@ void ricerca(auton an[])
                 break;
 
                 case 6:
-                    if(an[v].s == "L")
+                    if(an[v].s == " L")
                     contr = true;
 
                     else{
@@ -148,7 +171,7 @@ void ricerca(auton an[])
                     }
                 break;
                 case 7:
-                    if(an[v].d == "L")
+                    if(an[v].d == " L")
                     contr = true;
 
                     else{
@@ -160,10 +183,10 @@ void ricerca(auton an[])
                 }
              k++;
             }
-                if(contr == true)
-                //b++;
-                cout<<b<<")"<<an[v+1].categoria<<setw(3);
-
+                if(contr == true){
+                    b++;
+                    cout<<endl<<b<<")"<<an[v].categoria<<"  "<<an[v].marca<<an[v].modello<<"  "<<an[v].colore;
+                }
         }
      v++;
     }
@@ -199,10 +222,12 @@ void menu()
                 ricerca(an);
                     break;
 
+                case 3:
+
+                    break;
+
 
             }
-
-
 
 
     }while(sc!=4);
