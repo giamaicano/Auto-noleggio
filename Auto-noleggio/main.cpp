@@ -1,3 +1,15 @@
+/*
+Categoria	 Marca	 Modello	 Colore	 Lunedì	 Martedì	 Mercoledì	 Giovedì	 Venerdi	 Sabato	 Domenica
+utilitaria	 FIAT	 Panda	 rosso	 L	 L	 L	 A	 A	 A	 A
+utilitaria	 KIA	 Pikanto	 bronzo	 A	 A	 L	 L	 L	 A	 A
+lusso	 Mercedes	 Classe 5	 nero	 L	 L	 L	 L	 L	 A	 A
+sportiva	 Lamborghini	 Huracan	 giallo	 L	 L	 L	 L	 L	 L	 L
+furgone	 Ford	 Transit	 bianco	 A	 A	 A	 A	 A	 L	 L
+lusso	 BMW	 Serie 5	 grigio metallizzato	 L	 L	 L	 L	 L	 A	 A
+utilitaria	 Peugeot	108	 verde	 L	 A	 L	 L	 L	 A	 L
+*/
+
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -16,7 +28,7 @@ struct auton{
 
 void vis_lista(auton an[],int &cont)
 {
-    ifstream fin("Auto.csv");
+    ifstream fin("Autotab.csv");
     string app;
 
     while(getline(fin,app,','))
@@ -52,11 +64,11 @@ void vis_lista(auton an[],int &cont)
 
     fin.close();
 }
-void ricerca(auton an[],int &cont)
+void ricerca(auton an[],int &cont,int g[],int sc1)
 {
-    ifstream fin("Auto.csv");
+
     string c;
-    int v = 1,b = 0,g[10],i = 1,k;
+    int v = 1,b = 0,i = 1,k,vi[10],ac = 1;
     bool contr,cc = false;
 
     //cout<<"Inserire la categoria di auto ed i giorni in cui la si vuole noleggiare(1,2,3,4,5,6,7)(suddivisi da uno spazio) : ";
@@ -77,29 +89,6 @@ void ricerca(auton an[],int &cont)
     cout<<"Inserire i rispettivi giorni (1,2,3,4,5,6,7)(inserire 8 per uscire): "<<endl;
 
 
- /*    do
-    {
-        c[t] = cg[t];
-        cout<<c[t]<<endl;
-        cout<<"ciao";
-        t++;
-
-    }
-     while(cg[t] != ' ');
-
-    do
-    {
-        if(cg[t] != ' ')
-        g[i] = cg[t];
-        cout<<"lol";
-        t++; i++;
-    }
-    while(cg[t] != ' '  &&  cg[t+1] != ' ');
-
-    i = 0;
-*/
-
-
     do
     {
        cin>>g[i];
@@ -110,6 +99,8 @@ void ricerca(auton an[],int &cont)
        else
         cout<<"Numero sbagliato"<<endl;
     }while(g[i]!=8 && i!=8);
+
+
 
 
     cout<<"Auto disponibili: ";
@@ -189,6 +180,7 @@ void ricerca(auton an[],int &cont)
             if(contr == true){
                 b++;
                 cout<<endl<<b<<")"<<an[v].categoria<<"  "<<an[v].marca<<"  "<<an[v].modello<<"  "<<an[v].colore;
+                vi[b] = v;
             }
         }
      v++;
@@ -197,8 +189,6 @@ void ricerca(auton an[],int &cont)
 
     if(b != 0)
     {
-
-        int sc1;
 
         cout<<endl<<endl<<"Inserire il numero corrispondente all'auto che si vuole affittare: ";
         do{
@@ -209,21 +199,79 @@ void ricerca(auton an[],int &cont)
 
     }
     else
-        cout<<endl<<"Non sono state trovate macchine disponibili con le seguenti caratteristiche";
+        cout<<endl<<"Non sono state trovate macchine disponibili con le seguenti caratteristiche"<<endl;
+
+
+        while(g[ac] != 8)
+        {
+            switch(g[ac])
+            {
+
+                 case 1:
+                    an[vi[sc1]].l = " A";
+
+                 break;
+
+                 case 2:
+                    an[vi[sc1]].ma = " A";
+
+                 break;
+
+                 case 3:
+                    an[vi[sc1]].me = " A";
+
+                 break;
+
+                 case 4:
+                    an[vi[sc1]].g = " A";
+
+                 break;
+                 case 5:
+                    an[vi[sc1]].v = " A";
+
+                 break;
+
+                 case 6:
+                    an[vi[sc1]].s = " A";
+
+                 break;
+                 case 7:
+                    an[vi[sc1]].d = " A";
+
+                 break;
+
+            }
+          ac++;
+        }
 
 
 
 
-    fin.close();
+
 }
 
-void stampa()
+void stampa(auto an[],int &cont)
 {
+    /*int sp = 0;
+    while(sp != cont)
+    {
+
+      cout<<" "<<an[sp].categoria;
+      cout<<" "<<an[sp].marca;
+      cout<<" "<<an[sp].modello;
+      cout<<"  "<<an[sp].colore;
+      cout<<" "<<an[sp].l;
+      cout<<" "<<an[sp].ma;
+      cout<<" "<<an[sp].me;
+      cout<<" "<<an[sp].g;
+      cout<<" "<<an[sp].v;
+      cout<<" "<<an[sp].s;
+      cout<<" "<<an[sp].d;
+      cout<<endl;
+      sp++;
 
 
-
-
-
+    }*/
 
 
 }
@@ -234,14 +282,15 @@ void menu()
 
     auton an[20];
 
-    int sc,cont = 0;;
+    int sc,cont = 0,g[10],sc1;
 
     do
     {
         cout << endl<<"MENU'" << endl;
-        cout << "1) Inserimento della categoria e dei giorni in cui si vuole utilizzare l'autovettura" << endl
-             << "2) Stampa del file aggiornato " << endl
-             << "3) Esci.. " << endl<<endl
+        cout << "1) Visualizzazione della lista delle automobili" << endl
+             << "2) Inserimento della categoria e dei giorni di noleggio " << endl
+             << "3) Stampa del file aggiornato " << endl
+             << "4) Esci.. " << endl<<endl
              << ">> ";
             cin>>sc;
 
@@ -253,11 +302,11 @@ void menu()
                     break;
 
                 case 2:
-                ricerca(an,cont);
+                ricerca(an,cont,g,sc1);
                     break;
 
                 case 3:
-
+                    stampa(an,cont);
                     break;
 
 
