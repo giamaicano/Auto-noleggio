@@ -20,7 +20,6 @@ using namespace std;
 struct auton{
 
     string categoria,marca,modello,colore;
-    //string giorni[7];
     string l,ma,me,g,v,s,d;
 };
 
@@ -71,7 +70,6 @@ void ricerca(auton an[],int &cont,int g[],int sc1)
     int v = 1,b = 0,i = 1,k,vi[10],ac = 1;
     bool contr,cc = false;
 
-    //cout<<"Inserire la categoria di auto ed i giorni in cui la si vuole noleggiare(1,2,3,4,5,6,7)(suddivisi da uno spazio) : ";
     cout<<"Inserire la categoria di auto che si vuole noleggiare: ";
 
     do{
@@ -84,7 +82,7 @@ void ricerca(auton an[],int &cont,int g[],int sc1)
         }
         if(cc == false)
             cout<<"La categoria inserita non esiste, riprovare: ";
-    }while(cc == false);
+      }while(cc == false);
 
     cout<<"Inserire i rispettivi giorni (1,2,3,4,5,6,7)(inserire 8 per uscire): "<<endl;
 
@@ -252,26 +250,42 @@ void ricerca(auton an[],int &cont,int g[],int sc1)
 
 void stampa(auto an[],int &cont)
 {
-    /*int sp = 0;
+    int sp = 0;
+    string app1 = "";
+
+    ofstream fout("Autotest.txt");
+
     while(sp != cont)
     {
+        fout<<an[sp].categoria<<',';
+        fout<<an[sp].marca<<',';
+        fout<<an[sp].modello<<',';
+        fout<<an[sp].colore<<',';
+        fout<<an[sp].l<<',';
+        fout<<an[sp].ma<<',';
+        fout<<an[sp].me<<',';
+        fout<<an[sp].g<<',';
+        fout<<an[sp].v<<',';
+        fout<<an[sp].s<<',';
+        fout<<an[sp].d;
+        fout<<endl;
 
-      cout<<" "<<an[sp].categoria;
-      cout<<" "<<an[sp].marca;
-      cout<<" "<<an[sp].modello;
-      cout<<"  "<<an[sp].colore;
-      cout<<" "<<an[sp].l;
-      cout<<" "<<an[sp].ma;
-      cout<<" "<<an[sp].me;
-      cout<<" "<<an[sp].g;
-      cout<<" "<<an[sp].v;
-      cout<<" "<<an[sp].s;
-      cout<<" "<<an[sp].d;
-      cout<<endl;
-      sp++;
+        sp++;
+
+    }
+
+    fout.close();
 
 
-    }*/
+    ifstream fin("Autotest.txt");
+
+    while(getline(fin,app1,','))
+    {
+      cout<<app1<<"  ";
+    }
+
+
+    fin.close();
 
 
 }
